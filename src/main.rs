@@ -322,17 +322,17 @@ struct AccelData {
 
 fn legion_go_gyro_axis_swap(raw: GyroData) -> GyroData {
     GyroData {
-        x: -raw.x,
-        y: raw.z, // Flipped from -raw.z to fix Left/Right inversion
-        z: raw.y,
+        x: -raw.x, // Pitch (Up/Down) - Remains unchanged as it works correctly
+        y: -raw.z, // Reverted to original
+        z: -raw.y, // FLIPPED: Inverts the Roll axis (Left/Right aiming)
     }
 }
 
 fn legion_go_accel_axis_swap(raw: AccelData) -> AccelData {
     AccelData {
         x: raw.x,
-        y: raw.z, // Flipped to maintain physical alignment with the Gyro
-        z: -raw.y,
+        y: -raw.z, // Reverted to original
+        z: raw.y,  // FLIPPED: Matches the new Gyro Z-axis to prevent sensor drift
     }
 }
 fn read_gyro(device: &Gyrometer) -> windows::core::Result<GyroData> {
