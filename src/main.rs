@@ -322,15 +322,16 @@ struct AccelData {
 
 fn legion_go_gyro_axis_swap(raw: GyroData) -> GyroData {
     GyroData {
-        x: raw.x,
-        y: -raw.z,
+        x: -raw.x,
+        y: raw.z, // Flipped from -raw.z to fix Left/Right inversion
         z: raw.y,
     }
 }
+
 fn legion_go_accel_axis_swap(raw: AccelData) -> AccelData {
     AccelData {
         x: raw.x,
-        y: -raw.z,
+        y: raw.z, // Flipped to maintain physical alignment with the Gyro
         z: -raw.y,
     }
 }
