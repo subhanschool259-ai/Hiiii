@@ -322,17 +322,17 @@ struct AccelData {
 
 fn legion_go_gyro_axis_swap(raw: GyroData) -> GyroData {
     GyroData {
-        x: -raw.x, // Pitch (Up/Down) - Remains unchanged as it works correctly
-        y: -raw.z, // Reverted to original
-        z: -raw.y, // FLIPPED: Inverts the Roll axis (Left/Right aiming)
+        x: -raw.x, // Pitch (Up/Down) - You confirmed this works perfectly
+        y: raw.y,  // Yaw (Left/Right) - Unswapped for ROG Ally!
+        z: raw.z,  // Roll (Steering) - Unswapped for ROG Ally!
     }
 }
 
 fn legion_go_accel_axis_swap(raw: AccelData) -> AccelData {
     AccelData {
         x: raw.x,
-        y: -raw.z, // Reverted to original
-        z: raw.y,  // FLIPPED: Matches the new Gyro Z-axis to prevent sensor drift
+        y: raw.y,  // Unswapped to match the Gyro
+        z: raw.z,  // Unswapped to match the Gyro
     }
 }
 fn read_gyro(device: &Gyrometer) -> windows::core::Result<GyroData> {
