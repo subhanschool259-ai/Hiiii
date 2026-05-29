@@ -328,11 +328,15 @@ fn legion_go_gyro_axis_swap(raw: GyroData) -> GyroData {
     }
 }
 
-fn legion_go_accel_axis_swap(raw: AccelData) -> AccelData {
+fn legion_go_accel_axis_swap(_raw: AccelData) -> AccelData {
+    // "BED MODE" FAKE GRAVITY:
+    // We ignore the real accelerometer data entirely.
+    // We lock the values to simulate holding the ROG Ally upright 
+    // at a comfortable 45-degree gaming tilt. (9.8 m/s^2 split between Y and Z)
     AccelData {
-        x: raw.x,
-        y: raw.y,  // Unswapped to match the Gyro
-        z: raw.z,  // Unswapped to match the Gyro
+        x: 0.0,
+        y: -6.93, 
+        z: -6.93, 
     }
 }
 fn read_gyro(device: &Gyrometer) -> windows::core::Result<GyroData> {
