@@ -322,9 +322,9 @@ struct AccelData {
 
 fn legion_go_gyro_axis_swap(raw: GyroData) -> GyroData {
     GyroData {
-        x: -raw.x, // Pitch (Up/Down) - You confirmed this works perfectly
-        y: raw.y,  // Yaw (Left/Right) - Unswapped for ROG Ally!
-        z: raw.z,  // Roll (Steering) - Unswapped for ROG Ally!
+        x: -raw.x, // Pitch (Up/Down) - Unchanged
+        y: -raw.y, // FLIPPED: Inverts Left/Right for Yuzu
+        z: raw.z,  // Roll (Steering) - Unchanged
     }
 }
 
